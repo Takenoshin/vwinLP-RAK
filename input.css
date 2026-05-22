@@ -35,11 +35,46 @@
   font-weight: 400;
 }
 
+/* VN page: single Saira family (no legacy patch fonts or weight hacks) */
+.font-vn-vi {
+  font-family: "Saira", system-ui, sans-serif;
+}
+
+.font-vn-vi .feature-offer-copy p {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.font-vn-vi ol li {
+  font-size: 0.875rem;
+  line-height: 1.5rem;
+}
+
+.font-vn-vi footer p {
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+
+@media (min-width: 640px) {
+  .font-vn-vi .feature-offer-copy p,
+  .font-vn-vi ol li {
+    font-size: 1rem;
+  }
+}
+
+.font-vn .hero-terms-link {
+  font-style: italic;
+}
+
 .font-vn .hero-copy-reward {
   font-size: 20px;
   font-style: italic;
   font-weight: 700;
   line-height: 1.15;
+}
+
+.font-vn.font-vn-vi .hero-copy-reward {
+  font-weight: 500;
 }
 
 .font-cn .hero-copy-reward {
@@ -54,7 +89,7 @@
   font-size: 20px;
 }
 
-.font-vn .step-chevron p,
+.font-vn .step-chevron p:not(.step-copy),
 .font-vn .promo-subtitle {
   font-style: italic;
 }
@@ -77,9 +112,91 @@
   font-weight: 700;
 }
 
-.font-vn :where(.step-chevron p, .promo-subtitle) {
+.font-vn.font-vn-vi :where(
+  .hero-copy-title,
+  .hero-copy-reward,
+  .step-chevron h2,
+  .font-bold,
+  .font-black,
+  .font-cn-display,
+  .font-cn-section,
+  .terms-back-top
+) {
+  font-weight: 500;
+}
+
+/* VN step subtext: same sizing/style as SG English (.font-vn .step-chevron .step-copy), medium weight */
+.font-vn.font-vn-vi .step-chevron .step-copy {
+  font-size: 0.875rem;
+  line-height: 1.25;
+  font-style: italic;
+  font-weight: 500;
+  color: #94a3b8;
+}
+
+@media (min-width: 640px) {
+  .font-vn.font-vn-vi .step-chevron .step-copy {
+    font-size: 1rem;
+  }
+}
+
+.font-vn :where(.step-chevron p:not(.step-copy), .promo-subtitle) {
   font-style: italic;
   font-weight: 400;
+}
+
+.font-vn .step-chevron .step-copy {
+  font-size: 0.875rem;
+  line-height: 1.25;
+  font-style: italic;
+  font-weight: 400;
+  color: #94a3b8;
+}
+
+.font-cn .step-chevron .step-copy {
+  font-size: 0.875rem;
+  line-height: 1.25;
+  font-style: normal;
+  font-weight: normal;
+  font-variation-settings: "wght" 400;
+  color: #94a3b8;
+}
+
+@media (min-width: 640px) {
+  .font-vn .step-chevron .step-copy,
+  .font-cn .step-chevron .step-copy {
+    font-size: 1rem;
+  }
+}
+
+.font-cn .step-chevron h2 {
+  font-style: normal;
+  font-variation-settings: "wght" 500;
+  font-weight: normal;
+}
+
+.font-cn .terms-back-top {
+  font-style: normal;
+  font-variation-settings: "wght" 500;
+  font-weight: normal;
+  text-transform: none;
+  letter-spacing: normal;
+}
+
+.terms-collapse-inner {
+  overflow: hidden;
+  height: 0;
+  transition: height 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .terms-collapse-inner {
+    transition: none;
+  }
+
+  #terms details[open] .terms-collapse-inner {
+    height: auto;
+  }
 }
 
 .text-balance {
@@ -216,8 +333,10 @@
 
 .hero-logo {
   filter:
-    drop-shadow(0 2px 10px rgba(231, 223, 216, 0.82))
-    drop-shadow(0 0 18px rgba(231, 223, 216, 0.36));
+    drop-shadow(0 4px 14px #fff)
+    drop-shadow(0 8px 28px #fff)
+    drop-shadow(0 14px 42px #fff)
+    drop-shadow(0 0 36px #fff);
 }
 
 .hero-logo {
@@ -351,6 +470,156 @@
   transition:
     transform 220ms ease,
     box-shadow 220ms ease;
+}
+
+.feature-offer-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 2.5rem;
+}
+
+.feature-offer-grid > :first-child {
+  margin-top: 1em;
+}
+
+@media (min-width: 640px) {
+  .feature-offer-grid {
+    gap: 1.25rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .feature-offer-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2rem;
+  }
+}
+
+.feature-offer-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  min-height: 12rem;
+  width: 100%;
+  min-width: 0;
+  overflow: visible;
+  text-align: left;
+  background-color: #fff;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+@media (min-width: 640px) {
+  .feature-offer-card {
+    grid-template-columns: minmax(16rem, 1fr) minmax(10rem, 21rem);
+    min-height: 16rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .feature-offer-card {
+    min-height: 20rem;
+  }
+}
+
+.feature-offer-copy {
+  display: flex;
+  min-width: 0;
+  max-width: 32.25rem;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 1.5rem 1rem;
+}
+
+@media (min-width: 768px) {
+  .feature-offer-copy {
+    gap: 1rem;
+    padding: 1.5rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .feature-offer-copy {
+    padding: 2.5rem;
+  }
+}
+
+.feature-offer-copy :where(h3, p) {
+  overflow-wrap: anywhere;
+}
+
+.feature-offer-copy h3 {
+  font-size: 1.5rem;
+  line-height: 2.25rem;
+}
+
+@media (min-width: 640px) {
+  .feature-offer-copy h3 {
+    font-size: 1.875rem;
+  }
+}
+
+.feature-offer-copy p {
+  font-style: italic;
+}
+
+.font-cn .feature-offer-copy h3 {
+  font-style: normal;
+  font-variation-settings: "wght" 500;
+  font-weight: normal;
+}
+
+.font-cn .feature-offer-copy p {
+  font-style: normal;
+  font-variation-settings: "wght" 400;
+  font-weight: normal;
+}
+
+.feature-offer-media {
+  display: flex;
+  min-height: 7rem;
+  min-width: 0;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-end;
+  overflow: visible;
+}
+
+@media (min-width: 768px) {
+  .feature-offer-media {
+    min-height: 12rem;
+  }
+}
+
+.feature-offer-model-wrap {
+  display: flex;
+  height: 7rem;
+  flex-shrink: 0;
+  align-items: flex-end;
+  justify-content: flex-end;
+  overflow: visible;
+}
+
+@media (min-width: 768px) {
+  .feature-offer-model-wrap {
+    height: 12rem;
+  }
+}
+
+.feature-offer-model {
+  height: 14rem;
+  width: 100%;
+  max-width: 21rem;
+  flex-shrink: 0;
+  object-fit: contain;
+  object-position: bottom;
+}
+
+@media (min-width: 768px) {
+  .feature-offer-model {
+    height: 24rem;
+  }
 }
 
 .cta-button {
