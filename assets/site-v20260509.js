@@ -1,5 +1,5 @@
 (() => {
-  const ASSET_VERSION = "20260538";
+  const ASSET_VERSION = "20260558";
 
   const PAGE_CONFIG = {
     my: {
@@ -17,7 +17,7 @@
   const updateCtaLinks = (ctaUrl) => {
     const url = ctaUrl || "#";
 
-    document.querySelectorAll(".hero-copy-cta").forEach((link) => {
+    document.querySelectorAll(".hero-copy-cta, .feature-offer-cta").forEach((link) => {
       link.href = url;
     });
 

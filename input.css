@@ -38,11 +38,15 @@
 /* VN page: single Saira family (no legacy patch fonts or weight hacks) */
 .font-vn-vi {
   font-family: "Saira", system-ui, sans-serif;
+  letter-spacing: -0.01em;
+  font-stretch: 95%;
+  font-variation-settings: "wdth" 95;
 }
 
 .font-vn-vi .feature-offer-copy p {
   font-size: 0.875rem;
   line-height: 1.25rem;
+  font-weight: 500;
 }
 
 .font-vn-vi ol li {
@@ -70,7 +74,7 @@
   font-size: 20px;
   font-style: italic;
   font-weight: 700;
-  line-height: 1.15;
+  line-height: 1.25;
 }
 
 .font-vn.font-vn-vi .hero-copy-reward {
@@ -120,7 +124,8 @@
   .font-black,
   .font-cn-display,
   .font-cn-section,
-  .terms-back-top
+  .terms-back-top,
+  .feature-offer-cta
 ) {
   font-weight: 500;
 }
@@ -175,12 +180,87 @@
   font-weight: normal;
 }
 
-.font-cn .terms-back-top {
+.font-cn .terms-back-top,
+.font-cn .feature-offer-cta {
   font-style: normal;
   font-variation-settings: "wght" 500;
   font-weight: normal;
   text-transform: none;
   letter-spacing: normal;
+}
+
+.cta-pill-black {
+  display: inline-flex;
+  width: fit-content;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  background-image: linear-gradient(to bottom, #333, #000);
+  padding: 0.75rem 2.5rem;
+  font-size: 0.875rem;
+  font-weight: 900;
+  font-style: italic;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #fff;
+  text-decoration: none;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.28);
+  transition: background-image 0.15s ease, box-shadow 0.15s ease;
+}
+
+.cta-pill-black:hover {
+  background-image: linear-gradient(to bottom, #666, #333);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.feature-offer-cta {
+  padding: 0.5rem 1.5rem;
+}
+
+@media (max-width: 639px) {
+  .font-vn-vi .feature-offer-cta {
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 100%;
+    height: 2rem;
+    padding: 0 1.15rem;
+    font-size: 0.8125rem;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    white-space: nowrap;
+  }
+}
+
+@container (max-width: 11.5rem) {
+  .font-vn-vi .feature-offer-cta {
+    padding-inline: 0.85rem;
+    font-size: 0.75rem;
+  }
+}
+
+@container (max-width: 10rem) {
+  .font-vn-vi .feature-offer-cta {
+    padding-inline: 0.65rem;
+    font-size: 0.6875rem;
+  }
+}
+
+@container (max-width: 8.75rem) {
+  .font-vn-vi .feature-offer-cta {
+    padding-inline: 0.5rem;
+    font-size: 0.625rem;
+  }
+}
+
+@media (min-width: 640px) {
+  .cta-pill-black:not(.feature-offer-cta) {
+    padding: 0.875rem 3rem;
+    font-size: 1rem;
+  }
 }
 
 .terms-collapse-inner {
@@ -197,6 +277,11 @@
   #terms details[open] .terms-collapse-inner {
     height: auto;
   }
+}
+
+#terms ol {
+  list-style-position: outside;
+  padding-left: 2.75rem;
 }
 
 .text-balance {
@@ -277,15 +362,54 @@
   mix-blend-mode: darken;
 }
 
-@media (max-width: 639px) {
+@media (max-width: 380px) {
   .step-strip {
     --step-depth: 26px;
-    --step-overlap: 18px;
+    --step-overlap: calc(var(--step-depth) - 6px);
+    display: flex;
+    flex-direction: column;
+    overflow: visible;
+    filter: drop-shadow(0 1px 0 rgba(15, 23, 42, 0.04));
   }
 
   .step-chevron {
-    min-height: 148px;
-    padding: 0.85rem 0.75rem 0.9rem 1.5rem;
+    flex: none;
+    width: 100%;
+    min-height: 0;
+    margin-left: 0;
+    margin-top: calc(var(--step-overlap) * -1);
+    padding: calc(1.25rem + var(--step-depth)) 1.5rem calc(1.25rem + var(--step-depth));
+    clip-path: polygon(
+      0 0,
+      50% var(--step-depth),
+      100% 0,
+      100% calc(100% - var(--step-depth)),
+      50% 100%,
+      0 calc(100% - var(--step-depth))
+    );
+  }
+
+  .step-chevron:first-child {
+    margin-top: 0;
+    padding-top: 1.25rem;
+    clip-path: polygon(
+      0 0,
+      100% 0,
+      100% calc(100% - var(--step-depth)),
+      50% 100%,
+      0 calc(100% - var(--step-depth))
+    );
+  }
+
+  .step-chevron:last-child {
+    padding-bottom: 1.25rem;
+    clip-path: polygon(
+      0 0,
+      50% var(--step-depth),
+      100% 0,
+      100% 100%,
+      0 100%
+    );
   }
 }
 
@@ -509,6 +633,13 @@
   background-repeat: no-repeat;
 }
 
+@media (max-width: 380px) {
+  section:has(.feature-offer-grid) {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
+
 @media (min-width: 640px) {
   .feature-offer-card {
     grid-template-columns: minmax(16rem, 1fr) minmax(10rem, 21rem);
@@ -529,19 +660,13 @@
   flex-direction: column;
   justify-content: center;
   gap: 0.75rem;
-  padding: 1.5rem 1rem;
+  padding: 0 0 0 2.25rem;
+  container-type: inline-size;
 }
 
 @media (min-width: 768px) {
   .feature-offer-copy {
     gap: 1rem;
-    padding: 1.5rem;
-  }
-}
-
-@media (min-width: 1280px) {
-  .feature-offer-copy {
-    padding: 2.5rem;
   }
 }
 
@@ -574,6 +699,35 @@
   font-style: normal;
   font-variation-settings: "wght" 400;
   font-weight: normal;
+}
+
+@media (max-width: 639px) {
+  .feature-offer-copy p {
+    font-size: 0.875rem;
+    line-height: 1.1;
+  }
+
+  .font-vn .hero-copy-reward {
+    line-height: 1.25;
+  }
+
+  .step-chevron h2 {
+    line-height: 1;
+  }
+
+  .feature-offer-copy h3 {
+    line-height: 1;
+    font-size: 20px;
+  }
+
+  .step-copy {
+    padding-top: 6px;
+  }
+
+  .feature-offer-copy {
+    gap: 0.5rem;
+    padding: 0 0 0 1.25rem;
+  }
 }
 
 .feature-offer-media {
@@ -619,6 +773,58 @@
 @media (min-width: 768px) {
   .feature-offer-model {
     height: 24rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .feature-offer-card {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    min-height: 0;
+    height: auto;
+    overflow: hidden;
+  }
+
+  .feature-offer-copy {
+    order: 1;
+    flex: 0 0 auto;
+    width: 100%;
+    max-width: none;
+    padding: 1rem 0.75rem 0.75rem 1rem;
+  }
+
+  .feature-offer-media {
+    order: 2;
+    flex: 0 0 auto;
+    width: 100%;
+    min-height: 0;
+    height: auto;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+  }
+
+  .feature-offer-model-wrap {
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  .feature-offer-model {
+    display: block;
+    height: auto;
+    max-height: 9.5rem;
+    width: auto;
+    max-width: 100%;
+    margin: 0;
+    object-fit: contain;
+    object-position: bottom center;
   }
 }
 
