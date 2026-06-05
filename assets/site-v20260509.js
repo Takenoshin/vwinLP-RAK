@@ -1,5 +1,5 @@
 (() => {
-  const ASSET_VERSION = "20260562";
+  const ASSET_VERSION = "20260564";
 
   const PAGE_CONFIG = {
     my: {
