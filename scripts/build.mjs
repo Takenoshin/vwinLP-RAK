@@ -104,10 +104,11 @@ const layoutConfig = {
     bodyClass: "font-vn bg-white text-[#252b38] antialiased",
   },
   vietnamese: {
-    headFonts: `    <link href="https://fonts.googleapis.com/css2?family=Monda:wght@400..700&display=swap" rel="stylesheet" />`,
-    fontPreload: "",
+    headFonts: `    <link href="https://fonts.googleapis.com/css2?family=Fjalla+One&family=Monda:wght@400..700&display=swap" rel="stylesheet" />`,
+    fontPreload: `    <link rel="preload" as="font" type="font/woff2" crossorigin href="https://fonts.gstatic.com/s/fjallaone/v16/Yq6R-LCAWCX3-6Ky7FAFrO56kjouQb5-6g.woff2" />
+    <link rel="preload" as="font" type="font/woff2" crossorigin href="https://fonts.gstatic.com/s/fjallaone/v16/Yq6R-LCAWCX3-6Ky7FAFrOF6kjouQb4.woff2" />`,
     logoClass: "hero-logo absolute inset-x-0 top-5 z-20 mx-auto w-36 sm:top-7 sm:w-52",
-    heroTitleClass: "hero-copy-title text-balance max-w-3xl text-3xl font-bold text-[#2c303a] sm:text-5xl",
+    heroTitleClass: "hero-copy-title font-hero-display text-balance max-w-3xl text-3xl text-[#2c303a] sm:text-5xl",
     sectionTitleClass: "text-balance text-2xl font-bold sm:text-3xl",
     featureHeadingClass: "text-balance font-bold",
     bodyClass: "font-vn font-vn-vi bg-white text-[#252b38] antialiased",

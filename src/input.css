@@ -35,7 +35,7 @@
   font-weight: 400;
 }
 
-/* VN page: Monda (variable weight 400–700) */
+/* VN page: Monda body copy; Fjalla One on .hero-copy-title only */
 .font-vn-vi {
   font-family: "Monda", system-ui, sans-serif;
   font-optical-sizing: auto;
@@ -115,13 +115,20 @@
   font-weight: 400;
 }
 
-.font-vn :where(.hero-copy-title, .hero-copy-reward, .step-chevron h2, .font-bold, .font-black, .font-cn-display, .font-cn-section) {
+.font-vn :where(.hero-copy-reward, .step-chevron h2, .font-bold, .font-black, .font-cn-display, .font-cn-section) {
   font-style: italic;
   font-weight: 700;
 }
 
+.font-vn.font-vn-vi :where(.hero-copy-title, .font-hero-display) {
+  font-family: "Fjalla One", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  text-transform: uppercase;
+  letter-spacing: normal;
+}
+
 .font-vn.font-vn-vi :where(
-  .hero-copy-title,
   .hero-copy-reward,
   .step-chevron h2,
   .font-bold,
