@@ -1,36 +1,41 @@
 {
   "brand": "Vwin",
-  "assetVersion": "202606241",
+  "assetVersion": "20260624062611",
   "themeColor": "#ef0338",
   "markets": {
     "my": {
       "defaultLang": "en",
-      "languages": ["en", "zh"],
+      "languages": [
+        "en",
+        "zh"
+      ],
       "locales": {
         "en": "en-MY",
         "zh": "zh-Hans-MY"
       },
-      "layout": "bilingual",
-      "productImages": [1, 4, 3, 2, 13, 16, 14, 9, 15, 17, 20, 19]
+      "layout": "bilingual"
     },
     "sg": {
       "defaultLang": "en",
-      "languages": ["en", "zh"],
+      "languages": [
+        "en",
+        "zh"
+      ],
       "locales": {
         "en": "en-SG",
         "zh": "zh-Hans-SG"
       },
-      "layout": "bilingual",
-      "productImages": [1, 4, 3, 2, 13, 16, 14, 9, 15, 17, 20, 19]
+      "layout": "bilingual"
     },
     "vn": {
       "defaultLang": "vi",
-      "languages": ["vi"],
+      "languages": [
+        "vi"
+      ],
       "locales": {
         "vi": "vi-VN"
       },
-      "layout": "vietnamese",
-      "productImages": [1, 2, 3, 4, 9, 11, 12, 14, 10, 17, 18]
+      "layout": "vietnamese"
     }
   }
 }

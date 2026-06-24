@@ -104,23 +104,15 @@ const layoutConfig = {
     bodyClass: "font-vn bg-white text-[#252b38] antialiased",
   },
   vietnamese: {
-    headFonts: `    <link href="https://fonts.googleapis.com/css2?family=Saira:ital,wdth,wght@0,95,400;0,95,500;1,95,400;1,95,500&display=swap" rel="stylesheet" />`,
+    headFonts: `    <link href="https://fonts.googleapis.com/css2?family=Monda:wght@400..700&display=swap" rel="stylesheet" />`,
     fontPreload: "",
     logoClass: "hero-logo absolute inset-x-0 top-5 z-20 mx-auto w-36 sm:top-7 sm:w-52",
-    heroTitleClass: "hero-copy-title text-balance max-w-3xl text-3xl font-black text-[#2c303a] sm:text-5xl",
-    sectionTitleClass: "text-balance text-2xl font-black sm:text-3xl",
-    featureHeadingClass: "text-balance font-black",
+    heroTitleClass: "hero-copy-title text-balance max-w-3xl text-3xl font-bold text-[#2c303a] sm:text-5xl",
+    sectionTitleClass: "text-balance text-2xl font-bold sm:text-3xl",
+    featureHeadingClass: "text-balance font-bold",
     bodyClass: "font-vn font-vn-vi bg-white text-[#252b38] antialiased",
   },
 };
-
-const buildProductCarousel = (images, gameAltKey) =>
-  images
-    .map(
-      (id) =>
-        `                <a class="product-slide" href="#"><img class="product-card" src="${assetUrl(`product-${id}.jpg`)}" alt="" data-i18n-alt="${gameAltKey}" /></a>`
-    )
-    .join("\n");
 
 const renderHtml = (marketId, market) => {
   const layout = layoutConfig[market.layout] || layoutConfig.bilingual;
@@ -149,8 +141,7 @@ const renderHtml = (marketId, market) => {
     .replaceAll("{{DEFAULT_LANG}}", market.defaultLang)
     .replaceAll("{{LANGS}}", langs)
     .replaceAll("{{LOCALES_JSON}}", localesJson)
-    .replaceAll("{{STORAGE_KEY}}", storageKey)
-    .replaceAll("{{PRODUCT_CAROUSEL}}", buildProductCarousel(market.productImages, "promo.gameAlt"));
+    .replaceAll("{{STORAGE_KEY}}", storageKey);
 
   html = html.replace(/\{\{A:([^}]+)\}\}/g, (_, file) => assetUrl(file));
 

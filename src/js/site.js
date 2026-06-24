@@ -10,13 +10,6 @@
     document.querySelectorAll(".hero-copy-cta, .feature-offer-cta").forEach((link) => {
       link.href = url;
     });
-
-    document.querySelectorAll(".product-carousel").forEach((carousel) => {
-      carousel.dataset.productLink = url;
-      carousel.querySelectorAll(".product-slide").forEach((link) => {
-        link.href = url;
-      });
-    });
   };
 
   const initCopy = async () => {
@@ -150,11 +143,6 @@
         align: "start",
         containScroll: "trimSnaps",
         dragFree: true,
-      });
-
-      const linkUrl = carousel.dataset.productLink || "#";
-      carousel.querySelectorAll(".product-slide").forEach((link) => {
-        link.href = linkUrl;
       });
     });
   };

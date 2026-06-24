@@ -35,12 +35,16 @@
   font-weight: 400;
 }
 
-/* VN page: single Saira family (no legacy patch fonts or weight hacks) */
+/* VN page: Monda (variable weight 400–700) */
 .font-vn-vi {
-  font-family: "Saira", system-ui, sans-serif;
-  letter-spacing: -0.01em;
-  font-stretch: 95%;
-  font-variation-settings: "wdth" 95;
+  font-family: "Monda", system-ui, sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  letter-spacing: -0.03em;
+}
+
+.font-vn-vi :where(.font-black, .cta-pill-black, .hero-copy-cta, .terms-back-top) {
+  font-weight: 700;
 }
 
 .font-vn-vi .feature-offer-copy p {
@@ -334,6 +338,51 @@
   .product-carousel {
     --product-slide-size: min(18vw, 200px);
     --product-slide-spacing: 1.25rem;
+  }
+}
+
+.feature-carousel-section .feature-carousel-title {
+  color: #fff;
+}
+
+.feature-carousel-slide {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  text-align: center;
+}
+
+.feature-carousel-image {
+  aspect-ratio: 2 / 3;
+  display: block;
+  width: 100%;
+  border-radius: 1rem;
+  object-fit: contain;
+  object-position: bottom;
+}
+
+.feature-carousel-title {
+  width: 100%;
+  font-size: 1rem;
+  line-height: 1.25;
+}
+
+.feature-carousel-cta {
+  width: 100%;
+  max-width: 100%;
+  justify-content: center;
+  padding-inline: 0.75rem;
+  font-size: 0.75rem;
+}
+
+@media (min-width: 640px) {
+  .feature-carousel-title {
+    font-size: 1.0625rem;
+  }
+
+  .feature-carousel-cta {
+    font-size: 0.8125rem;
   }
 }
 
