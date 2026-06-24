@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="{{HTML_LANG}}" class="scroll-smooth motion-reduce:scroll-auto">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{{META_TITLE}}</title>
+    <meta name="description" content="{{META_DESCRIPTION}}" />
+    <link rel="icon" href="{{A:icon.svg}}" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="{{A:icon.svg}}" />
+    <meta property="og:title" content="{{META_TITLE}}" />
+    <meta property="og:description" content="{{META_DESCRIPTION}}" />
+    <meta property="og:image" content="{{A:icon.svg}}" />
+    <meta name="theme-color" content="{{THEME_COLOR}}" />
+    <link rel="preload" as="image" href="{{A:hero-900x1200.webp}}" media="(max-width: 639px)" fetchpriority="high" />
+    <link rel="preload" as="image" href="{{A:hero-2560x1200-layer1.webp}}" media="(min-width: 640px)" fetchpriority="high" />
+    <link rel="preload" as="image" href="{{A:hero-2560x1200-layer2.webp}}" media="(min-width: 640px)" fetchpriority="high" />
+    <link rel="preload" as="image" href="{{A:hero-2560x1200-layer3.webp}}" media="(min-width: 640px)" fetchpriority="high" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+{{HEAD_FONTS}}
+    <link rel="stylesheet" href="./styles.css?v={{VERSION}}" />
+  </head>
+  <body
+    class="{{BODY_CLASS}}"
+    data-page="{{MARKET_ID}}"
+    data-default-lang="{{DEFAULT_LANG}}"
+    data-langs="{{LANGS}}"
+    data-version="{{VERSION}}"
+    data-locales="{{LOCALES_JSON}}"
+    data-storage-key="{{STORAGE_KEY}}"
+  >
+{{FONT_PRELOAD}}
+    <main class="overflow-hidden">
+      <section class="relative min-h-[620px] bg-[#eef0f2] sm:min-h-[clamp(700px,82svh,900px)]">
+        <img class="{{LOGO_CLASS}}" src="{{A:logo-vwin.svg}}" alt="{{BRAND}}" />
+{{LANG_SWITCHER}}
+        <img class="decor-float left-[-58px] top-[235px] z-10 w-32 sm:left-[-42px] sm:top-[250px] sm:w-36 lg:w-48" src="{{A:decor-hero3.webp}}" alt="" aria-hidden="true" />
+        <img class="decor-float decor-float-slow right-[-72px] top-[295px] z-10 w-36 sm:right-[-52px] sm:top-[285px] sm:w-40 lg:w-56" src="{{A:decor-hero1.webp}}" alt="" aria-hidden="true" />
+        <img class="decor-float right-[8%] top-[105px] z-10 hidden w-20 sm:block lg:w-28" src="{{A:decor-hero2.webp}}" alt="" aria-hidden="true" />
+        <div class="hero-media absolute inset-0 overflow-hidden" aria-hidden="true">
+          <picture>
+            <source media="(max-width: 639px)" srcset="{{A:hero-900x1200.webp}}" />
+            <img class="absolute inset-0 h-full w-full object-cover object-top sm:hidden" src="{{A:hero-900x1200.webp}}" alt="" data-i18n-alt="hero.alt" loading="eager" fetchpriority="high" decoding="async" />
+          </picture>
+          <img class="hero-layer hero-layer-bg hidden sm:block" src="{{A:hero-2560x1200-layer1.webp}}" alt="" data-i18n-alt="hero.alt" loading="eager" fetchpriority="high" decoding="async" />
+          <img class="hero-layer hero-layer-pulse hidden sm:block" src="{{A:hero-2560x1200-layer2.webp}}" alt="" loading="eager" fetchpriority="high" decoding="async" />
+          <img class="hero-layer hero-layer-float hidden sm:block" src="{{A:hero-2560x1200-layer3.webp}}" alt="" loading="eager" fetchpriority="high" decoding="async" />
+        </div>
+        <div class="absolute inset-x-0 bottom-0 h-[220px] bg-gradient-to-t from-white from-[18%] via-white/80 via-[58%] to-transparent sm:h-[440px] sm:from-[10%] sm:via-white/70 sm:via-[48%]"></div>
+        <div class="relative mx-auto flex min-h-[inherit] max-w-6xl flex-col items-center justify-end px-5 pb-3 text-center sm:pb-10">
+          <h1 class="{{HERO_TITLE_CLASS}}" data-i18n="hero.title">88 Lucky Free Spins</h1>
+          <p class="hero-copy-reward text-balance mt-0 text-xl font-medium text-[#5a4a48] sm:mt-3 sm:text-3xl" data-i18n-html="hero.reward">
+            Limited to first 300 players. Win Big Today!
+          </p>
+          <div class="hero-copy-actions mt-2 flex flex-col items-center gap-2 pb-1 sm:mt-2 sm:pb-0">
+            <a class="hero-copy-cta cta-button inline-flex min-w-44 items-center justify-center rounded-full bg-[#ef0338] px-8 py-3 text-sm font-black text-white shadow-[0_10px_22px_rgba(239,3,56,0.28)] transition hover:bg-[#d10231] sm:text-base" href="#" data-i18n="hero.cta">
+              Claim your Freespins
+            </a>
+            <a class="hero-terms-link text-sm font-medium text-[#5a4a48] underline decoration-[#5a4a48]/35 underline-offset-4 transition hover:text-[#ef0338] hover:decoration-[#ef0338]" href="#terms" data-i18n="hero.termsLink">Terms & Conditions</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="reveal border-y border-slate-100 bg-white">
+        <div class="step-strip mx-auto grid max-w-6xl grid-cols-3">
+          <div class="step-item step-chevron flex flex-col items-center justify-start gap-2 text-center sm:flex-row sm:justify-start sm:gap-3 sm:text-left">
+            <span class="flex h-[74px] items-start justify-center sm:h-auto">
+              <img class="w-[60px] shrink-0" src="{{A:helper-1.webp}}" alt="" aria-hidden="true" />
+            </span>
+            <div><h2 class="text-base font-black text-[#252b38] sm:text-lg" data-i18n="steps.register.title">Register an account</h2><p class="step-copy" data-i18n="steps.register.text">Sign up in minutes with your basic details.</p></div>
+          </div>
+          <div class="step-item step-chevron flex flex-col items-center justify-start gap-2 text-center sm:flex-row sm:justify-start sm:gap-3 sm:text-left">
+            <span class="flex h-[74px] items-start justify-center sm:h-auto">
+              <img class="w-[60px] shrink-0" src="{{A:helper-2.webp}}" alt="" aria-hidden="true" />
+            </span>
+            <div><h2 class="text-base font-black text-[#252b38] sm:text-lg" data-i18n="steps.deposit.title">Claim your Bonus</h2><p class="step-copy" data-i18n="steps.deposit.text">Activate your welcome offer right after registration.</p></div>
+          </div>
+          <div class="step-item step-chevron flex flex-col items-center justify-start gap-2 text-center sm:flex-row sm:justify-start sm:gap-3 sm:text-left">
+            <span class="flex h-[74px] items-start justify-center sm:h-auto">
+              <img class="w-[60px] shrink-0" src="{{A:helper-3.webp}}" alt="" aria-hidden="true" />
+            </span>
+            <div><h2 class="text-base font-black text-[#252b38] sm:text-lg" data-i18n="steps.play.title">Start Winning</h2><p class="step-copy" data-i18n="steps.play.text">Jump into sports, casino, and live games instantly.</p></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="reveal bg-[#f7f6f6] px-5 py-20">
+        <div class="mx-auto max-w-6xl text-center">
+          <h2 class="{{SECTION_TITLE_CLASS}}" data-i18n="promo.title">Top Games</h2>
+          <p class="promo-subtitle hidden text-balance mt-2 text-sm text-slate-500 sm:text-base" data-i18n="promo.subtitle">Claim Your 88 Free Spins Today!</p>
+          <div class="product-carousel reveal mt-10" data-product-link="#">
+            <div class="product-viewport">
+              <div class="product-track">
+{{PRODUCT_CAROUSEL}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="reveal relative z-10 bg-gradient-to-br from-white via-[#fbf2f1] to-white px-5 py-20">
+        <img class="decor-float decor-float-slow pointer-events-none z-30 right-[-34px] top-[-42px] w-[104px] lg:right-[-76px] lg:top-[-52px] lg:w-52" src="{{A:decor-cards.webp}}" alt="" aria-hidden="true" />
+        <div class="relative z-10 mx-auto max-w-6xl text-center">
+          <h2 class="{{SECTION_TITLE_CLASS}}" data-i18n="why.title">Where the Dragons Play</h2>
+          <div class="feature-offer-grid mt-9 text-left">
+            <article class="feature-card feature-offer-card reveal rounded-xl border border-slate-100 shadow-[0_18px_42px_rgba(15,23,42,0.08)]" style="background-image: url('{{A:card-category-bg.png}}')">
+              <div class="feature-offer-copy">
+                <h3 class="{{FEATURE_HEADING_CLASS}}" data-i18n="feature.security.title">Sports</h3>
+                <p class="text-balance text-slate-500 sm:text-base" data-i18n="feature.security.text">Where fans turn into winners with our competitive odds</p>
+                <a class="feature-offer-cta cta-pill-black" href="#" data-i18n="feature.cta">Join Now</a>
+              </div>
+              <div class="feature-offer-media">
+                <div class="feature-offer-model-wrap">
+                  <img class="feature-offer-model" src="{{A:card-sport-model.webp}}" alt="" loading="lazy" decoding="async" />
+                </div>
+              </div>
+            </article>
+            <article class="feature-card feature-offer-card reveal rounded-xl border border-slate-100 shadow-[0_18px_42px_rgba(15,23,42,0.08)]" style="background-image: url('{{A:card-category-bg.png}}')">
+              <div class="feature-offer-copy">
+                <h3 class="{{FEATURE_HEADING_CLASS}}" data-i18n="feature.games.title">Casino</h3>
+                <p class="text-balance text-slate-500 sm:text-base" data-i18n="feature.games.text">Spin slots and explore a wide selection of casino entertainment.</p>
+                <a class="feature-offer-cta cta-pill-black" href="#" data-i18n="feature.cta">Join Now</a>
+              </div>
+              <div class="feature-offer-media">
+                <div class="feature-offer-model-wrap">
+                  <img class="feature-offer-model" src="{{A:card-casino-model.webp}}" alt="" loading="lazy" decoding="async" />
+                </div>
+              </div>
+            </article>
+            <article class="feature-card feature-offer-card reveal rounded-xl border border-slate-100 shadow-[0_18px_42px_rgba(15,23,42,0.08)]" style="background-image: url('{{A:card-category-bg.png}}')">
+              <div class="feature-offer-copy">
+                <h3 class="{{FEATURE_HEADING_CLASS}}" data-i18n="feature.ui.title">Live Casino</h3>
+                <p class="text-balance text-slate-500 sm:text-base" data-i18n="feature.ui.text">Join live table experiences with smooth access across devices.</p>
+                <a class="feature-offer-cta cta-pill-black" href="#" data-i18n="feature.cta">Join Now</a>
+              </div>
+              <div class="feature-offer-media">
+                <div class="feature-offer-model-wrap">
+                  <img class="feature-offer-model" src="{{A:card-livecasino-model.webp}}" alt="" loading="lazy" decoding="async" />
+                </div>
+              </div>
+            </article>
+            <article class="feature-card feature-offer-card reveal rounded-xl border border-slate-100 shadow-[0_18px_42px_rgba(15,23,42,0.08)]" style="background-image: url('{{A:card-category-bg.png}}')">
+              <div class="feature-offer-copy">
+                <h3 class="{{FEATURE_HEADING_CLASS}}" data-i18n="feature.esports.title">Esports</h3>
+                <p class="text-balance text-slate-500 sm:text-base" data-i18n="feature.esports.text">Track top esports events with live markets and fast-paced action.</p>
+                <a class="feature-offer-cta cta-pill-black" href="#" data-i18n="feature.cta">Join Now</a>
+              </div>
+              <div class="feature-offer-media">
+                <div class="feature-offer-model-wrap">
+                  <img class="feature-offer-model" src="{{A:card-esports-model.webp}}" alt="" loading="lazy" decoding="async" />
+                </div>
+              </div>
+            </article>
+            <article class="feature-card feature-offer-card reveal rounded-xl border border-slate-100 shadow-[0_18px_42px_rgba(15,23,42,0.08)]" style="background-image: url('{{A:card-category-bg.png}}')">
+              <div class="feature-offer-copy">
+                <h3 class="{{FEATURE_HEADING_CLASS}}" data-i18n="feature.keno.title">Keno</h3>
+                <p class="text-balance text-slate-500 sm:text-base" data-i18n="feature.keno.text">Feel the thrill of every draw. Mega Jackpots await!</p>
+                <a class="feature-offer-cta cta-pill-black" href="#" data-i18n="feature.cta">Join Now</a>
+              </div>
+              <div class="feature-offer-media">
+                <div class="feature-offer-model-wrap">
+                  <img class="feature-offer-model" src="{{A:card-keno-model.webp}}" alt="" loading="lazy" decoding="async" />
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <div class="relative z-30 h-0 overflow-visible">
+        <img class="decor-float pointer-events-none z-30 left-[-44px] top-[-48px] w-28 lg:left-[-88px] lg:top-[-96px] lg:w-56" src="{{A:decor-chip3.webp}}" alt="" aria-hidden="true" />
+      </div>
+
+      <section id="terms" class="reveal scroll-mt-6 bg-white px-5 py-16 sm:scroll-mt-8">
+        <div class="mx-auto max-w-4xl">
+          <details class="group">
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-4 border-b border-slate-200 pb-4 text-left [&::-webkit-details-marker]:hidden">
+              <h2 class="min-w-0 flex-1 text-balance text-2xl font-black sm:text-3xl" data-i18n="terms.title">Terms & Conditions</h2>
+              <svg class="h-5 w-5 shrink-0 text-slate-500 transition duration-300 ease-out group-open:rotate-180 motion-reduce:transition-none" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+              </svg>
+            </summary>
+            <div class="terms-collapse">
+              <div class="terms-collapse-inner">
+                <ol class="terms-list mt-8 list-decimal space-y-3 text-left text-sm leading-6 text-slate-600 sm:text-base">
+              <li data-i18n="terms.1">This promotion applies to new {{BRAND}} players from 06/01/2026 00:00:00 (GMT+8).</li>
+              <li data-i18n="terms.2">The first 300 players who register an account will receive 88 free spins on Wealth of the East (Ela Games).</li>
+              <li data-i18n="terms.3">Free spins will be credited once (1x) throughout the promo period with the qualifying registration. Credited free spins will expire 7 days after issuance.</li>
+              <li data-i18n="terms.4">Free spins winnings must be wagered forty times (40x) on Casino Slots within 7 days prior to withdrawal.</li>
+              <li data-i18n="terms.5">Winnings from free spins are capped at $50. Any winnings that exceed the capped amount will be forfeited.</li>
+              <li data-i18n="terms.6">Only Casino Slots games will count towards wagering contribution. List of included casino slots games are provided under General Terms and Conditions.</li>
+              <li data-i18n="terms.7">Withdrawal will only be processed once a player no longer has any active wagering requirement.</li>
+              <li data-i18n="terms.8">Player can request a waiver of the rollover requirement by contacting Customer Service.</li>
+              <li data-i18n="terms.9">{{BRAND}} reserves the right to change, update, modify, or cancel this promotion at any time without prior notice</li>
+              <li data-i18n="terms.10">General Terms and Conditions apply.</li>
+                </ol>
+              </div>
+            </div>
+          </details>
+          <div class="mt-8 flex justify-center">
+            <button class="terms-back-top inline-flex cursor-pointer items-center justify-center rounded-full bg-gradient-to-b from-[#333] to-black px-10 py-3 text-sm font-black italic uppercase tracking-[0.08em] text-white shadow-[0_8px_20px_rgba(0,0,0,0.28)] transition hover:brightness-110 sm:px-12 sm:py-3.5 sm:text-base" type="button" data-i18n="terms.backToTop">Back to Top</button>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="border-t border-slate-100 bg-slate-50 px-5 py-8 text-center text-xs text-slate-500">
+      <p data-i18n="footer.notice">18+ only. Please play responsibly. {{BRAND}} 2026.</p>
+    </footer>
+      <script src="{{A:embla-carousel.umd.js}}"></script>
+      <script src="{{A:site.js}}" defer></script>
+  </body>
+</html>

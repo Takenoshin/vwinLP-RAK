@@ -1,43 +1,56 @@
-# Longfu88 Landing Pages
+# Vwin Landing Pages (RAK)
 
-Static landing pages for MY, VN, and SG.
+Static landing pages for MY, SG, and VN. Built from one template, config, and locale files.
 
 ## Structure
 
-- `MY/index.html` - Malaysia page with English/Chinese language switcher
-- `VN/index.html` - Vietnam page
-- `SG/index.html` - Singapore page
-- `assets/` - shared images, scripts, and JSON copy
-- `input.css` - Tailwind source plus project CSS
-- `output-v20260509.css` - current compiled CSS used by the pages
+```
+config/site.json       Market settings, cache-bust version, product lists
+locales/               Copy per market + language (edit these)
+src/index.template.html
+src/input.css          Tailwind source
+src/js/                Site scripts
+assets/                Shared images only
+dist/                  Generated output (gitignored, wiped every build)
+```
+
+## Commands
+
+```sh
+npm install
+npm run build          # clean dist/ and rebuild all markets
+npm run build:bump     # bump assetVersion in config, then build
+npm run dev            # build + local preview servers
+```
+
+Preview URLs after `npm run dev`:
+
+- MY: http://127.0.0.1:4174/
+- SG: http://127.0.0.1:4175/
+- VN: http://127.0.0.1:4176/
+
+## Edit copy
+
+| Market | Files |
+|--------|-------|
+| Malaysia EN | `locales/my.en.json` |
+| Malaysia 中文 | `locales/my.zh.json` |
+| Singapore EN | `locales/sg.en.json` |
+| Singapore 中文 | `locales/sg.zh.json` |
+| Vietnam | `locales/vn.vi.json` |
+
+CTA links live in each locale file as `links.cta`.
 
 ## Cache busting
 
-After changing images or assets, bump the version in:
-
-- `MY/index.html`, `SG/index.html`, `VN/index.html` (`?v=…` on local asset URLs)
-- `assets/site-v20260509.js` (`ASSET_VERSION`)
-
-Then sync `assets/` into `release/*/assets-v20260427/` and deploy `release/`.
-
-## Build CSS
-
-Use the Tailwind standalone CLI:
+Set `assetVersion` in `config/site.json`, or run:
 
 ```sh
-./tailwindcss -i input.css -o output.css --minify
-cp output.css output-v20260509.css
+npm run build:bump
 ```
 
-The `tailwindcss` binary is not committed. Download the standalone CLI from the official Tailwind CSS releases for your OS.
+Every asset URL and stylesheet gets `?v=<assetVersion>`. Each build deletes `dist/` first so old files never linger.
 
-## Local Preview
+## Deploy
 
-Serve one page folder at a time:
-
-```sh
-cd MY
-python3 -m http.server 4174
-```
-
-Then open `http://127.0.0.1:4174/`.
+Upload the contents of each `dist/{market}/` folder to its domain root. See `DEPLOY.md`.

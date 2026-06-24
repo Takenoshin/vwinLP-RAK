@@ -1,18 +1,8 @@
 (() => {
-  const ASSET_VERSION = "20260566";
-
-  const PAGE_CONFIG = {
-    my: {
-      i18nFile: "i18n-my-v20260509.json",
-      storageKey: "longfu88-my-lang-v2",
-      locales: { en: "en-MY", zh: "zh-Hans-MY" },
-    },
-    sg: {
-      i18nFile: "i18n-sg-v20260509.json",
-      storageKey: "longfu88-sg-lang-v2",
-      locales: { en: "en-SG", zh: "zh-Hans-SG" },
-    },
-  };
+  const { page, defaultLang, langs, version, locales, storageKey } = document.body.dataset;
+  const langList = langs ? langs.split(",").filter(Boolean) : [];
+  const localeMap = locales ? JSON.parse(locales) : {};
+  const langButtons = document.querySelectorAll("[data-lang-option]");
 
   const updateCtaLinks = (ctaUrl) => {
     const url = ctaUrl || "#";
@@ -29,35 +19,33 @@
     });
   };
 
-  const initLanguageSwitcher = async () => {
-    const page = document.body.dataset.page;
-    const config = PAGE_CONFIG[page];
-    const langButtons = document.querySelectorAll("[data-lang-option]");
-    if (!config || !langButtons.length) return;
+  const initCopy = async () => {
+    if (!page || !langList.length) return;
 
-    document.fonts?.load?.('400 1em "tt-hei-chs-variable"', "88 次幸运免费旋转");
-    document.fonts?.load?.('400 1em "tt-hei-chs-variable"', "填写您的基本资料，简单几个步骤即可完成注册。");
-    document.fonts?.load?.('500 1em "tt-hei-chs-variable"', "领取奖励");
+    if (langList.includes("zh")) {
+      document.fonts?.load?.('400 1em "tt-hei-chs-variable"', "88 次幸运免费旋转");
+      document.fonts?.load?.('400 1em "tt-hei-chs-variable"', "填写您的基本资料，简单几个步骤即可完成注册。");
+      document.fonts?.load?.('500 1em "tt-hei-chs-variable"', "领取奖励");
+    }
 
     let copy;
     try {
-      const scriptUrl = document.currentScript?.src || "./assets/site.js";
-      const response = await fetch(
-        new URL(`${config.i18nFile}?v=${ASSET_VERSION}`, scriptUrl),
-        { cache: "no-cache" }
-      );
+      const response = await fetch(`./assets/i18n.json?v=${version}`, { cache: "no-cache" });
       copy = await response.json();
     } catch {
       return;
     }
 
     const setLanguage = (lang) => {
-      const dictionary = copy[lang] || copy.zh;
+      const fallbackLang = langList.includes("zh") ? "zh" : langList[0];
+      const dictionary = copy[lang] || copy[fallbackLang] || {};
       const isEnglish = lang === "en";
+      const isChinese = lang === "zh";
 
-      document.documentElement.lang = config.locales[lang] || config.locales.zh;
-      document.body.classList.toggle("font-cn", !isEnglish);
-      document.body.classList.toggle("font-vn", isEnglish);
+      document.documentElement.lang = localeMap[lang] || localeMap[fallbackLang] || lang;
+      document.body.classList.toggle("font-cn", isChinese);
+      document.body.classList.toggle("font-vn", !isChinese && lang !== "vi");
+      document.body.classList.toggle("font-vn-vi", lang === "vi");
       document.title = dictionary["meta.title"] || document.title;
 
       const description = document.querySelector('meta[name="description"]');
@@ -72,8 +60,18 @@
         if (value) item.textContent = value;
       });
 
+      document.querySelectorAll("[data-i18n-html]").forEach((item) => {
+        const value = dictionary[item.dataset.i18nHtml];
+        if (value) item.innerHTML = value;
+      });
+
+      document.querySelectorAll("[data-i18n-alt]").forEach((item) => {
+        const value = dictionary[item.dataset.i18nAlt];
+        if (value) item.alt = value;
+      });
+
       document.querySelectorAll("[data-lang-current]").forEach((item) => {
-        item.textContent = dictionary["lang.current"] || (isEnglish ? "English" : "中文");
+        item.textContent = dictionary["lang.current"] || (isEnglish ? "English" : isChinese ? "中文" : lang);
       });
 
       langButtons.forEach((button) => {
@@ -81,7 +79,7 @@
       });
 
       updateCtaLinks(dictionary["links.cta"]);
-      window.localStorage.setItem(config.storageKey, lang);
+      if (storageKey) window.localStorage.setItem(storageKey, lang);
     };
 
     langButtons.forEach((button) => {
@@ -91,10 +89,11 @@
       });
     });
 
-    setLanguage(window.localStorage.getItem(config.storageKey) || "en");
+    const savedLang = storageKey ? window.localStorage.getItem(storageKey) : null;
+    setLanguage(savedLang && langList.includes(savedLang) ? savedLang : defaultLang || langList[0]);
   };
 
-  initLanguageSwitcher();
+  initCopy();
 
   const initHeroMedia = () => {
     document.querySelectorAll(".hero-media").forEach((media) => {

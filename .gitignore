@@ -1,11 +1,4 @@
 .DS_Store
-archive/v1-build/
-release/
-upload-ready/
-screenshots/
+node_modules/
+dist/
 tailwindcss
-output-v20260427.css
-output-v20260428.css
-output-v20260428-2.css
-output-v20260504.css
-output-v20260505.css

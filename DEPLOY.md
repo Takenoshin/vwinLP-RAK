@@ -1,28 +1,34 @@
-# Static Deployment Notes
+# Deploy
 
-## Local build
+Build before upload:
 
-Download the Tailwind standalone executable into this folder as `tailwindcss`, then run:
-
-```bash
-./tailwindcss -i input.css -o output.css --minify
+```sh
+npm run build:bump
 ```
 
-## CloudPanel upload
+Upload everything inside each market folder to its domain document root:
 
-Create one Static Site in CloudPanel for each domain. Upload the matching `index.html`, the shared `output.css`, and the shared `assets/` folder into each domain's document root.
+| Domain | Upload from |
+|--------|-------------|
+| Malaysia | `dist/my/` |
+| Singapore | `dist/sg/` |
+| Vietnam | `dist/vn/` |
 
-Example SFTP commands:
+Each folder contains `index.html`, `styles.css`, and `assets/`.
 
-```bash
+## CloudPanel / SFTP example
+
+```sh
 sftp USER@SERVER_IP
 cd /home/USER/htdocs/DOMAIN
-put MY/index.html index.html
-put output.css output.css
+lcd dist/my
+put index.html
+put styles.css
 mkdir assets
 put -r assets/*
 bye
 ```
 
-Repeat with `VN/index.html` and `SG/index.html` for the other two domains.
+Repeat with `lcd dist/sg` and `lcd dist/vn` for the other domains.
 
+After copy or image changes, run `npm run build:bump` so browsers fetch fresh assets.
