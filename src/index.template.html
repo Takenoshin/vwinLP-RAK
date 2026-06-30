@@ -11,17 +11,20 @@
     <meta property="og:description" content="{{META_DESCRIPTION}}" />
     <meta property="og:image" content="{{A:icon.svg}}" />
     <meta name="theme-color" content="{{THEME_COLOR}}" />
-    <link rel="preload" as="image" href="{{A:hero-900x1200.webp}}" media="(max-width: 639px)" fetchpriority="high" />
-    <link rel="preload" as="image" href="{{A:hero-2560x1200-layer1.webp}}" media="(min-width: 640px)" fetchpriority="high" />
-    <link rel="preload" as="image" href="{{A:hero-2560x1200-layer2.webp}}" media="(min-width: 640px)" fetchpriority="high" />
-    <link rel="preload" as="image" href="{{A:hero-2560x1200-layer3.webp}}" media="(min-width: 640px)" fetchpriority="high" />
+    <link rel="preload" as="image" href="{{A:logo-vwin-dark.svg}}" fetchpriority="high" />
+    <link rel="preload" as="image" href="{{A:hero-900x1200-dark.webp}}" media="(max-width: 639px)" fetchpriority="high" />
+    <link rel="preload" as="image" href="{{A:hero-2560x1200-layer1-dark.webp}}" media="(min-width: 640px)" fetchpriority="high" />
+    <link rel="preload" as="image" href="{{A:hero-2560x1200-layer2-dark.webp}}" media="(min-width: 640px)" fetchpriority="high" />
+    <link rel="preload" as="image" href="{{A:hero-2560x1200-layer3-dark.webp}}" media="(min-width: 640px)" fetchpriority="high" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 {{HEAD_FONTS}}
+{{FONT_PRELOAD}}
     <link rel="stylesheet" href="./styles.css?v={{VERSION}}" />
   </head>
   <body
     class="{{BODY_CLASS}}"
+    data-theme="dark"
     data-page="{{MARKET_ID}}"
     data-default-lang="{{DEFAULT_LANG}}"
     data-langs="{{LANGS}}"
@@ -29,62 +32,75 @@
     data-locales="{{LOCALES_JSON}}"
     data-storage-key="{{STORAGE_KEY}}"
   >
-{{FONT_PRELOAD}}
+    <div id="site-loader" class="site-loader" role="status" aria-live="polite" aria-label="Loading">
+      <img class="site-loader-logo" src="{{A:logo-vwin-dark.svg}}" data-dark-src="{{A:logo-vwin-dark.svg}}" data-light-src="{{A:logo-vwin.svg}}" alt="" width="208" height="64" />
+    </div>
     <main class="overflow-hidden">
-      <section class="relative min-h-[620px] bg-[#eef0f2] sm:min-h-[clamp(700px,82svh,900px)]">
-        <img class="{{LOGO_CLASS}}" src="{{A:logo-vwin.svg}}" alt="{{BRAND}}" />
+      <section class="hero-section relative min-h-[620px] bg-[#eef0f2] sm:min-h-[100svh]">
+        <img class="{{LOGO_CLASS}}" src="{{A:logo-vwin-dark.svg}}" data-dark-src="{{A:logo-vwin-dark.svg}}" data-light-src="{{A:logo-vwin.svg}}" alt="{{BRAND}}" />
 {{LANG_SWITCHER}}
-        <img class="decor-float left-[-58px] top-[235px] z-10 w-32 sm:left-[-42px] sm:top-[250px] sm:w-36 lg:w-48" src="{{A:decor-hero3.webp}}" alt="" aria-hidden="true" />
-        <img class="decor-float decor-float-slow right-[-72px] top-[295px] z-10 w-36 sm:right-[-52px] sm:top-[285px] sm:w-40 lg:w-56" src="{{A:decor-hero1.webp}}" alt="" aria-hidden="true" />
-        <img class="decor-float right-[8%] top-[105px] z-10 hidden w-20 sm:block lg:w-28" src="{{A:decor-hero2.webp}}" alt="" aria-hidden="true" />
+        <div class="theme-switcher absolute right-2 top-2 z-40 sm:right-4 sm:top-4">
+          <button class="theme-toggle" type="button" data-theme-toggle aria-label="Đổi giao diện ngày hoặc đêm" aria-pressed="true">
+            <span class="theme-toggle-track" aria-hidden="true">
+              <img class="theme-toggle-icon theme-toggle-sun" src="{{A:icon-sun.svg}}" alt="" width="14" height="14" />
+              <img class="theme-toggle-icon theme-toggle-moon" src="{{A:icon-moon.svg}}" alt="" width="14" height="14" />
+              <span class="theme-toggle-thumb"></span>
+            </span>
+          </button>
+        </div>
+        <img class="decor-float hero-decor hero-decor-a left-[-58px] top-[235px] z-10 w-32 sm:left-[-42px] sm:top-[250px] sm:w-36 lg:w-48" src="{{A:decor-hero3.webp}}" alt="" aria-hidden="true" />
+        <img class="decor-float decor-float-slow hero-decor hero-decor-b right-[-72px] top-[295px] z-10 w-36 sm:right-[-52px] sm:top-[285px] sm:w-40 lg:w-56" src="{{A:decor-hero1.webp}}" alt="" aria-hidden="true" />
+        <img class="decor-float hero-decor hero-decor-c left-[8%] bottom-[105px] z-0 hidden w-20 sm:block lg:w-28" src="{{A:decor-hero2.webp}}" alt="" aria-hidden="true" />
         <div class="hero-media absolute inset-0 overflow-hidden" aria-hidden="true">
           <picture>
-            <source media="(max-width: 639px)" srcset="{{A:hero-900x1200.webp}}" />
-            <img class="absolute inset-0 h-full w-full object-cover object-top sm:hidden" src="{{A:hero-900x1200.webp}}" alt="" data-i18n-alt="hero.alt" loading="eager" fetchpriority="high" decoding="async" />
+            <source media="(max-width: 639px)" srcset="{{A:hero-900x1200-dark.webp}}" data-dark-src="{{A:hero-900x1200-dark.webp}}" data-light-src="{{A:hero-900x1200.webp}}" />
+            <img class="absolute inset-0 h-full w-full object-cover object-top sm:hidden" src="{{A:hero-900x1200-dark.webp}}" data-dark-src="{{A:hero-900x1200-dark.webp}}" data-light-src="{{A:hero-900x1200.webp}}" alt="" data-i18n-alt="hero.alt" loading="eager" fetchpriority="high" decoding="async" />
           </picture>
-          <img class="hero-layer hero-layer-bg hidden sm:block" src="{{A:hero-2560x1200-layer1.webp}}" alt="" data-i18n-alt="hero.alt" loading="eager" fetchpriority="high" decoding="async" />
-          <img class="hero-layer hero-layer-pulse hidden sm:block" src="{{A:hero-2560x1200-layer2.webp}}" alt="" loading="eager" fetchpriority="high" decoding="async" />
-          <img class="hero-layer hero-layer-float hidden sm:block" src="{{A:hero-2560x1200-layer3.webp}}" alt="" loading="eager" fetchpriority="high" decoding="async" />
+          <img class="hero-layer hero-layer-bg hidden sm:block" src="{{A:hero-2560x1200-layer1-dark.webp}}" data-dark-src="{{A:hero-2560x1200-layer1-dark.webp}}" data-light-src="{{A:hero-2560x1200-layer1.webp}}" alt="" data-i18n-alt="hero.alt" loading="eager" fetchpriority="high" decoding="async" />
+          <img class="hero-layer hero-layer-pulse hidden sm:block" src="{{A:hero-2560x1200-layer2-dark.webp}}" data-dark-src="{{A:hero-2560x1200-layer2-dark.webp}}" data-light-src="{{A:hero-2560x1200-layer2.webp}}" alt="" loading="eager" fetchpriority="high" decoding="async" />
+          <img class="hero-layer hero-layer-float hidden sm:block" src="{{A:hero-2560x1200-layer3-dark.webp}}" data-dark-src="{{A:hero-2560x1200-layer3-dark.webp}}" data-light-src="{{A:hero-2560x1200-layer3.webp}}" alt="" loading="eager" fetchpriority="high" decoding="async" />
         </div>
-        <div class="absolute inset-x-0 bottom-0 h-[220px] bg-gradient-to-t from-white from-[18%] via-white/80 via-[58%] to-transparent sm:h-[440px] sm:from-[10%] sm:via-white/70 sm:via-[48%]"></div>
-        <div class="relative mx-auto flex min-h-[inherit] max-w-6xl flex-col items-center justify-end px-5 pb-3 text-center sm:pb-10">
-          <h1 class="{{HERO_TITLE_CLASS}}" data-i18n="hero.title">88 Lucky Free Spins</h1>
-          <p class="hero-copy-reward text-balance mt-0 text-xl font-medium text-[#5a4a48] sm:mt-3 sm:text-3xl" data-i18n-html="hero.reward">
-            Limited to first 300 players. Win Big Today!
+        <div class="hero-bottom-fade absolute inset-x-0 bottom-0 z-10 h-[220px] bg-gradient-to-t from-white from-[18%] via-white/80 via-[58%] to-transparent sm:h-[440px] sm:from-[10%] sm:via-white/70 sm:via-[48%]"></div>
+        <div class="hero-copy-wrap relative z-20 mx-auto flex min-h-[inherit] max-w-6xl flex-col items-center justify-end px-5 pb-6 text-center sm:pb-8">
+          <h1 class="{{HERO_TITLE_CLASS}}" data-i18n="hero.title">288% WELCOME BONUS</h1>
+          <p class="hero-copy-reward text-balance mt-0 text-xl font-medium sm:mt-3 sm:text-3xl" data-i18n-html="hero.reward">
+            UP TO CNY 888 + 100 CNY CASH VOUCHER
           </p>
-          <div class="hero-copy-actions mt-2 flex flex-col items-center gap-2 pb-1 sm:mt-2 sm:pb-0">
-            <a class="hero-copy-cta cta-button inline-flex min-w-44 items-center justify-center rounded-full bg-[#ef0338] px-8 py-3 text-sm font-black text-white shadow-[0_10px_22px_rgba(239,3,56,0.28)] transition hover:bg-[#d10231] sm:text-base" href="#" data-i18n="hero.cta">
+          <div class="hero-copy-actions mt-4 flex flex-col items-center gap-2">
+            <a class="hero-copy-cta cta-button inline-flex min-w-44 items-center justify-center rounded-full px-8 py-3 font-black text-white transition" href="#" data-i18n="hero.cta">
               Claim your Freespins
             </a>
-            <a class="hero-terms-link text-sm font-medium text-[#5a4a48] underline decoration-[#5a4a48]/35 underline-offset-4 transition hover:text-[#ef0338] hover:decoration-[#ef0338]" href="#terms" data-i18n="hero.termsLink">Terms & Conditions</a>
           </div>
         </div>
       </section>
 
-      <section class="reveal border-y border-slate-100 bg-white">
+      <section class="steps-section reveal bg-white">
         <div class="step-strip mx-auto grid max-w-6xl grid-cols-3">
-          <div class="step-item step-chevron flex flex-col items-center justify-start gap-2 text-center sm:flex-row sm:justify-start sm:gap-3 sm:text-left">
-            <span class="flex h-[74px] items-start justify-center sm:h-auto">
-              <img class="w-[60px] shrink-0" src="{{A:helper-1.webp}}" alt="" aria-hidden="true" />
+          <div class="step-item step-chevron text-center">
+            <span class="step-icon-wrap">
+              <img class="step-icon" src="{{A:helper-1.webp}}" alt="" aria-hidden="true" />
+              <span class="step-number" aria-hidden="true">1</span>
             </span>
             <div><h2 class="text-base font-black text-[#252b38] sm:text-lg" data-i18n="steps.register.title">Register an account</h2><p class="step-copy" data-i18n="steps.register.text">Sign up in minutes with your basic details.</p></div>
           </div>
-          <div class="step-item step-chevron flex flex-col items-center justify-start gap-2 text-center sm:flex-row sm:justify-start sm:gap-3 sm:text-left">
-            <span class="flex h-[74px] items-start justify-center sm:h-auto">
-              <img class="w-[60px] shrink-0" src="{{A:helper-2.webp}}" alt="" aria-hidden="true" />
+          <div class="step-item step-chevron text-center">
+            <span class="step-icon-wrap">
+              <img class="step-icon" src="{{A:helper-2.webp}}" alt="" aria-hidden="true" />
+              <span class="step-number" aria-hidden="true">2</span>
             </span>
             <div><h2 class="text-base font-black text-[#252b38] sm:text-lg" data-i18n="steps.deposit.title">Claim your Bonus</h2><p class="step-copy" data-i18n="steps.deposit.text">Activate your welcome offer right after registration.</p></div>
           </div>
-          <div class="step-item step-chevron flex flex-col items-center justify-start gap-2 text-center sm:flex-row sm:justify-start sm:gap-3 sm:text-left">
-            <span class="flex h-[74px] items-start justify-center sm:h-auto">
-              <img class="w-[60px] shrink-0" src="{{A:helper-3.webp}}" alt="" aria-hidden="true" />
+          <div class="step-item step-chevron text-center">
+            <span class="step-icon-wrap">
+              <img class="step-icon" src="{{A:helper-3.webp}}" alt="" aria-hidden="true" />
+              <span class="step-number" aria-hidden="true">3</span>
             </span>
             <div><h2 class="text-base font-black text-[#252b38] sm:text-lg" data-i18n="steps.play.title">Start Winning</h2><p class="step-copy" data-i18n="steps.play.text">Jump into sports, casino, and live games instantly.</p></div>
           </div>
         </div>
       </section>
 
-      <section class="feature-carousel-section reveal relative z-10 bg-gradient-to-br from-[#1a2c37] to-[#0f212e] px-5 py-20 text-white">
+      <section class="feature-carousel-section reveal relative z-10 px-5 py-20">
         <img class="decor-float decor-float-slow pointer-events-none z-30 right-[-34px] top-[-42px] w-[104px] lg:right-[-76px] lg:top-[-52px] lg:w-52" src="{{A:decor-cards.webp}}" alt="" aria-hidden="true" />
         <div class="relative z-10 mx-auto max-w-6xl text-center">
           <h2 class="{{SECTION_TITLE_CLASS}}" data-i18n="why.title">Where the Dragons Play</h2>
@@ -92,29 +108,34 @@
             <div class="product-viewport">
               <div class="product-track">
                 <article class="product-slide feature-carousel-slide">
-                  <img class="feature-carousel-image" src="{{A:card-sport-model.webp}}" alt="" loading="lazy" decoding="async" />
-                  <h3 class="{{FEATURE_HEADING_CLASS}} feature-carousel-title" data-i18n="feature.security.title">Sports</h3>
-                  <a class="feature-offer-cta cta-pill-black feature-carousel-cta" href="#" data-i18n="feature.cta">Join Now</a>
+                  <div class="feature-carousel-media">
+                    <h3 class="{{FEATURE_HEADING_CLASS}} feature-carousel-title" data-i18n="feature.security.title">Sports</h3>
+                    <img class="feature-carousel-image" src="{{A:card-sport-model.webp}}" alt="" loading="lazy" decoding="async" />
+                  </div>
                 </article>
                 <article class="product-slide feature-carousel-slide">
-                  <img class="feature-carousel-image" src="{{A:card-casino-model.webp}}" alt="" loading="lazy" decoding="async" />
-                  <h3 class="{{FEATURE_HEADING_CLASS}} feature-carousel-title" data-i18n="feature.games.title">Casino</h3>
-                  <a class="feature-offer-cta cta-pill-black feature-carousel-cta" href="#" data-i18n="feature.cta">Join Now</a>
+                  <div class="feature-carousel-media">
+                    <h3 class="{{FEATURE_HEADING_CLASS}} feature-carousel-title" data-i18n="feature.games.title">Casino</h3>
+                    <img class="feature-carousel-image" src="{{A:card-casino-model.webp}}" alt="" loading="lazy" decoding="async" />
+                  </div>
                 </article>
                 <article class="product-slide feature-carousel-slide">
-                  <img class="feature-carousel-image" src="{{A:card-livecasino-model.webp}}" alt="" loading="lazy" decoding="async" />
-                  <h3 class="{{FEATURE_HEADING_CLASS}} feature-carousel-title" data-i18n="feature.ui.title">Live Casino</h3>
-                  <a class="feature-offer-cta cta-pill-black feature-carousel-cta" href="#" data-i18n="feature.cta">Join Now</a>
+                  <div class="feature-carousel-media">
+                    <h3 class="{{FEATURE_HEADING_CLASS}} feature-carousel-title" data-i18n="feature.ui.title">Live Casino</h3>
+                    <img class="feature-carousel-image" src="{{A:card-livecasino-model.webp}}" alt="" loading="lazy" decoding="async" />
+                  </div>
                 </article>
                 <article class="product-slide feature-carousel-slide">
-                  <img class="feature-carousel-image" src="{{A:card-esports-model.webp}}" alt="" loading="lazy" decoding="async" />
-                  <h3 class="{{FEATURE_HEADING_CLASS}} feature-carousel-title" data-i18n="feature.esports.title">Esports</h3>
-                  <a class="feature-offer-cta cta-pill-black feature-carousel-cta" href="#" data-i18n="feature.cta">Join Now</a>
+                  <div class="feature-carousel-media">
+                    <h3 class="{{FEATURE_HEADING_CLASS}} feature-carousel-title" data-i18n="feature.esports.title">Esports</h3>
+                    <img class="feature-carousel-image" src="{{A:card-esports-model.webp}}" alt="" loading="lazy" decoding="async" />
+                  </div>
                 </article>
                 <article class="product-slide feature-carousel-slide">
-                  <img class="feature-carousel-image" src="{{A:card-keno-model.webp}}" alt="" loading="lazy" decoding="async" />
-                  <h3 class="{{FEATURE_HEADING_CLASS}} feature-carousel-title" data-i18n="feature.keno.title">Keno</h3>
-                  <a class="feature-offer-cta cta-pill-black feature-carousel-cta" href="#" data-i18n="feature.cta">Join Now</a>
+                  <div class="feature-carousel-media">
+                    <h3 class="{{FEATURE_HEADING_CLASS}} feature-carousel-title" data-i18n="feature.keno.title">Keno</h3>
+                    <img class="feature-carousel-image" src="{{A:card-keno-model.webp}}" alt="" loading="lazy" decoding="async" />
+                  </div>
                 </article>
               </div>
             </div>
@@ -126,7 +147,7 @@
         <img class="decor-float pointer-events-none z-30 left-[-44px] top-[-48px] w-28 lg:left-[-88px] lg:top-[-96px] lg:w-56" src="{{A:decor-chip3.webp}}" alt="" aria-hidden="true" />
       </div>
 
-      <section id="terms" class="reveal scroll-mt-6 bg-white px-5 py-16 sm:scroll-mt-8">
+      <section id="terms" class="terms-section reveal scroll-mt-6 bg-white px-5 py-16 sm:scroll-mt-8">
         <div class="mx-auto max-w-4xl">
           <details class="group">
             <summary class="flex cursor-pointer list-none items-center justify-between gap-4 border-b border-slate-200 pb-4 text-left [&::-webkit-details-marker]:hidden">
@@ -135,33 +156,45 @@
                 <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
               </svg>
             </summary>
-            <div class="terms-collapse">
+            <div class="terms-collapse mt-4">
               <div class="terms-collapse-inner">
-                <ol class="terms-list mt-8 list-decimal space-y-3 text-left text-sm leading-6 text-slate-600 sm:text-base">
-              <li data-i18n="terms.1">This promotion applies to new {{BRAND}} players from 06/01/2026 00:00:00 (GMT+8).</li>
-              <li data-i18n="terms.2">The first 300 players who register an account will receive 88 free spins on Wealth of the East (Ela Games).</li>
-              <li data-i18n="terms.3">Free spins will be credited once (1x) throughout the promo period with the qualifying registration. Credited free spins will expire 7 days after issuance.</li>
-              <li data-i18n="terms.4">Free spins winnings must be wagered forty times (40x) on Casino Slots within 7 days prior to withdrawal.</li>
-              <li data-i18n="terms.5">Winnings from free spins are capped at $50. Any winnings that exceed the capped amount will be forfeited.</li>
-              <li data-i18n="terms.6">Only Casino Slots games will count towards wagering contribution. List of included casino slots games are provided under General Terms and Conditions.</li>
-              <li data-i18n="terms.7">Withdrawal will only be processed once a player no longer has any active wagering requirement.</li>
-              <li data-i18n="terms.8">Player can request a waiver of the rollover requirement by contacting Customer Service.</li>
-              <li data-i18n="terms.9">{{BRAND}} reserves the right to change, update, modify, or cancel this promotion at any time without prior notice</li>
-              <li data-i18n="terms.10">General Terms and Conditions apply.</li>
+                <ol class="terms-list mt-8 space-y-3 text-left text-sm leading-6 text-slate-600 sm:text-base">
+              <li data-i18n="terms.1">This promotion is applicable only for new VWIN players from 11 June 2026 00:00 to 19 July 2026 23:59 (GMT+8).</li>
+              <li data-i18n="terms.2">Only new Chinese (CNY) registrations made during the campaign period and have never placed their first deposit yet are eligible for the Sports Welcome Bonus Offers.</li>
+              <li data-i18n="terms.3">Make your first deposit within 30 days of registration. You're eligible for the Welcome Bonus Bundle. Please see the table below: *Insert Table Here*</li>
+              <li data-i18n="terms.4">The Deposit+Bonus must be rolled over 18x in Sports before withdrawal can be made and/or the additional bonus can be credited. *Insert CAL Here*</li>
+              <li data-i18n="terms.5">Eligible players for the cash voucher may use it exclusively for Casino slots and Sports only. The cash voucher is subject to a 6x rollover. The bonus will be awarded the following week, on Wednesdays throughout June &amp; July 2026.</li>
+              <li data-i18n="terms.6">The bonus is valid for 7 days from the date of issuance. Players must fulfill the wagering requirement within this period before they can make a withdrawal; otherwise, the winning and bonus amounts will be forfeited.</li>
+              <li data-i18n="terms.7">All tie/draw/refund/declined/void/cancelled bets, and bets at decimal odds below 1.6 (Malay odds -0.60; HK odds 1.60; Indo Odds 1.60) will not be included in the calculation for turnover &amp;/or rollover requirement.</li>
+              <li data-i18n="terms.8">Only All Sports &amp; AP Esports games will count towards wagering contribution.</li>
+              <li data-i18n="terms.9">The bonus promotion can only be claimed 1x and cannot be combined with any Welcome Bonus promotion offered by VWIN. Unless otherwise stated.</li>
+              <li data-i18n="terms.10">Withdrawal will not be processed if you still have an active rollover.</li>
+              <li data-i18n="terms.11">VWIN reserves the right to change, update, modify or cancel this promotion anytime. If any concern Please contact Customer Service for further assitance.</li>
+              <li data-i18n="terms.12">General Terms &amp; Conditions of Promotions apply.</li>
                 </ol>
               </div>
             </div>
           </details>
           <div class="mt-8 flex justify-center">
-            <button class="terms-back-top inline-flex cursor-pointer items-center justify-center rounded-full bg-gradient-to-b from-[#333] to-black px-10 py-3 text-sm font-black italic uppercase tracking-[0.08em] text-white shadow-[0_8px_20px_rgba(0,0,0,0.28)] transition hover:brightness-110 sm:px-12 sm:py-3.5 sm:text-base" type="button" data-i18n="terms.backToTop">Back to Top</button>
+            <button class="terms-back-top inline-flex cursor-pointer items-center justify-center rounded-full bg-gradient-to-b from-[#333] to-black px-10 py-3 text-sm font-black uppercase tracking-[0.08em] text-white shadow-[0_8px_20px_rgba(0,0,0,0.28)] transition hover:brightness-110 sm:px-12 sm:py-3.5 sm:text-base" type="button" data-i18n="terms.backToTop">Back to Top</button>
           </div>
         </div>
       </section>
     </main>
-    <footer class="border-t border-slate-100 bg-slate-50 px-5 py-8 text-center text-xs text-slate-500">
-      <p data-i18n="footer.notice">18+ only. Please play responsibly. {{BRAND}} 2026.</p>
+    <footer class="site-footer bg-white px-5 py-8 text-center text-xs text-slate-500">
+      <p class="site-footer-copyright" data-i18n="footer.copyright">© 2006-2026 Vwin.com | All Rights Reserved.</p>
+      <p class="site-footer-responsible">
+        <svg class="site-footer-age-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 328.863 328.863" aria-hidden="true">
+          <path fill="currentColor" d="M104.032,220.434V131.15H83.392V108.27h49.121v112.164H104.032z" />
+          <path fill="currentColor" d="M239.552,137.23c0,9.76-5.28,18.4-14.08,23.201c12.319,5.119,20,15.84,20,28.32c0,20.16-17.921,32.961-45.921,32.961c-28.001,0-45.921-12.641-45.921-32.48c0-12.801,8.32-23.682,21.28-28.801c-9.44-5.281-15.52-14.24-15.52-24c0-17.922,15.681-29.281,40.001-29.281C224.031,107.15,239.552,118.83,239.552,137.23z M180.51,186.352c0,9.441,6.721,14.721,19.041,14.721c12.32,0,19.2-5.119,19.2-14.721c0-9.279-6.88-14.561-19.2-14.561C187.23,171.791,180.51,177.072,180.51,186.352z M183.391,138.83c0,8.002,5.76,12.48,16.16,12.48c10.4,0,16.16-4.479,16.16-12.48c0-8.318-5.76-12.959-16.16-12.959C189.15,125.871,183.391,130.512,183.391,138.83z" />
+          <path fill="currentColor" d="M292.864,120.932c4.735,13.975,7.137,28.592,7.137,43.5c0,74.752-60.816,135.568-135.569,135.568S28.862,239.184,28.862,164.432c0-74.754,60.816-135.568,135.569-135.568c14.91,0,29.527,2.4,43.5,7.137V5.832C193.817,1.963,179.24,0,164.432,0C73.765,0,0.001,73.764,0.001,164.432s73.764,164.432,164.431,164.432S328.862,255.1,328.862,164.432c0-14.807-1.962-29.385-5.831-43.5H292.864z" />
+          <path fill="currentColor" d="M284.659,44.111L284.659,12.582L261.987,12.582L261.987,44.111L230.647,44.111L230.647,66.781L261.987,66.781L261.987,98.309L284.659,98.309L284.659,66.781L316.186,66.781L316.186,44.111Z" />
+        </svg>
+        <span data-i18n="footer.responsible">Gambling can be addictive. Please gamble responsibly.</span>
+      </p>
     </footer>
+{{INLINE_I18N}}
       <script src="{{A:embla-carousel.umd.js}}"></script>
-      <script src="{{A:site.js}}" defer></script>
+      <script src="{{A:site.js}}"></script>
   </body>
 </html>

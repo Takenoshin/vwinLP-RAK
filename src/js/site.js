@@ -3,6 +3,43 @@
   const langList = langs ? langs.split(",").filter(Boolean) : [];
   const localeMap = locales ? JSON.parse(locales) : {};
   const langButtons = document.querySelectorAll("[data-lang-option]");
+  const themeKey = "vwin-theme";
+  const themeToggle = document.querySelector("[data-theme-toggle]");
+  let canLoadLightAssets = false;
+
+  const swapThemeAssets = (theme) => {
+    document.querySelectorAll("[data-dark-src][data-light-src]").forEach((item) => {
+      const nextSrc = theme === "light" ? item.dataset.lightSrc : item.dataset.darkSrc;
+      if (!nextSrc) return;
+
+      if (item.tagName === "SOURCE") {
+        item.srcset = nextSrc;
+        return;
+      }
+
+      if (item.getAttribute("src") !== nextSrc) item.setAttribute("src", nextSrc);
+    });
+  };
+
+  const setTheme = (theme, options = {}) => {
+    const nextTheme = theme === "light" ? "light" : "dark";
+    const shouldPersist = options.persist !== false;
+    const shouldSwapAssets = options.swapAssets !== false;
+
+    document.body.dataset.theme = nextTheme;
+    themeToggle?.setAttribute("aria-pressed", String(nextTheme === "dark"));
+
+    const metaThemeColor = document.querySelector('meta[name="theme-color"]');
+    if (metaThemeColor) metaThemeColor.content = nextTheme === "dark" ? "#0c2230" : "#eb4758";
+
+    if (shouldSwapAssets && (nextTheme === "dark" || canLoadLightAssets)) swapThemeAssets(nextTheme);
+    if (shouldPersist) window.localStorage.setItem(themeKey, nextTheme);
+  };
+
+  setTheme("dark", { persist: false, swapAssets: false });
+  themeToggle?.addEventListener("click", () => {
+    setTheme(document.body.dataset.theme === "dark" ? "light" : "dark");
+  });
 
   const updateCtaLinks = (ctaUrl) => {
     const url = ctaUrl || "#";
@@ -10,6 +47,18 @@
     document.querySelectorAll(".hero-copy-cta, .feature-offer-cta").forEach((link) => {
       link.href = url;
     });
+  };
+
+  const readCopy = () => {
+    const inline = document.getElementById("site-i18n");
+    if (inline?.textContent) {
+      try {
+        return JSON.parse(inline.textContent);
+      } catch {
+        return null;
+      }
+    }
+    return null;
   };
 
   const initCopy = async () => {
@@ -21,12 +70,14 @@
       document.fonts?.load?.('500 1em "tt-hei-chs-variable"', "领取奖励");
     }
 
-    let copy;
-    try {
-      const response = await fetch(`./assets/i18n.json?v=${version}`, { cache: "no-cache" });
-      copy = await response.json();
-    } catch {
-      return;
+    let copy = readCopy();
+    if (!copy) {
+      try {
+        const response = await fetch(`./assets/i18n.json?v=${version}`, { cache: "no-cache" });
+        copy = await response.json();
+      } catch {
+        return;
+      }
     }
 
     const setLanguage = (lang) => {
@@ -88,47 +139,74 @@
 
   initCopy();
 
-  const initHeroMedia = () => {
-    document.querySelectorAll(".hero-media").forEach((media) => {
-      const visibleImages = [...media.querySelectorAll("img")].filter((image) => {
-        return window.getComputedStyle(image).display !== "none";
-      });
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-      if (!visibleImages.length) {
-        media.classList.add("is-loaded");
-        return;
+  const waitForImage = (image) => {
+    const decodeImage = () => {
+      if (typeof image.decode === "function") {
+        return image.decode().catch(() => undefined);
       }
 
-      const waitForImage = (image) => {
-        const decodeImage = () => {
-          if (typeof image.decode === "function") {
-            return image.decode().catch(() => undefined);
-          }
+      return Promise.resolve();
+    };
 
-          return Promise.resolve();
-        };
+    const src = image.currentSrc || image.src || "";
+    const isSvg = /\.svg($|\?)/i.test(src);
 
-        if (image.complete && image.naturalWidth > 0) {
-          return decodeImage();
-        }
+    if (image.complete && (image.naturalWidth > 0 || isSvg)) {
+      return decodeImage();
+    }
 
-        return new Promise((resolve) => {
-          image.addEventListener("load", resolve, { once: true });
-          image.addEventListener("error", resolve, { once: true });
-        }).then(decodeImage);
-      };
-
-      Promise.all(visibleImages.map(waitForImage)).then(() => {
-        media.classList.add("is-loaded");
-      });
-
-      window.setTimeout(() => {
-        media.classList.add("is-loaded");
-      }, 3500);
-    });
+    return new Promise((resolve) => {
+      image.addEventListener("load", resolve, { once: true });
+      image.addEventListener("error", resolve, { once: true });
+    }).then(decodeImage);
   };
 
-  initHeroMedia();
+  let pageRevealed = false;
+
+  const revealPage = () => {
+    if (pageRevealed) return;
+    pageRevealed = true;
+
+    document.body.classList.add("is-ready");
+    document.querySelectorAll(".hero-media").forEach((media) => {
+      media.classList.add("is-loaded");
+    });
+
+    document.querySelectorAll(".hero-logo, .hero-copy-title, .hero-copy-reward, .hero-copy-cta, .hero-decor").forEach((item) => {
+      item.style.opacity = "";
+    });
+
+    canLoadLightAssets = true;
+    if (window.localStorage.getItem(themeKey) === "light") setTheme("light", { persist: false });
+  };
+
+  const initPageLoader = () => {
+    const logo = document.querySelector(".hero-logo");
+    const heroMedia = document.querySelector(".hero-media");
+    const criticalImages = [];
+
+    if (logo) criticalImages.push(logo);
+
+    if (heroMedia) {
+      criticalImages.push(
+        ...[...heroMedia.querySelectorAll("img")].filter((image) => {
+          return window.getComputedStyle(image).display !== "none";
+        })
+      );
+    }
+
+    if (!criticalImages.length) {
+      revealPage();
+      return;
+    }
+
+    Promise.all(criticalImages.map(waitForImage)).then(revealPage);
+    window.setTimeout(revealPage, 2500);
+  };
+
+  initPageLoader();
 
   const initProductCarousels = () => {
     const Embla = window.EmblaCarousel;
@@ -149,7 +227,6 @@
 
   initProductCarousels();
 
-  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const scrollBehavior = reduceMotion ? "auto" : "smooth";
 
   const initTermsNavigation = () => {
