@@ -818,6 +818,7 @@ body[data-theme="light"] .feature-carousel-media {
   min-height: 0;
   align-items: stretch;
   justify-content: flex-end;
+  overflow: hidden;
   text-decoration: none;
 }
 
@@ -834,12 +835,19 @@ body[data-theme="light"] .feature-carousel-media {
   max-height: 100%;
   object-fit: contain;
   object-position: bottom center;
+  transform-origin: bottom center;
+  transition: transform 220ms ease;
+}
+
+.feature-carousel-link:hover .feature-carousel-image,
+.feature-carousel-link:focus-visible .feature-carousel-image {
+  transform: scale(1.05);
 }
 
 .feature-carousel-title {
   flex-shrink: 0;
   width: 100%;
-  padding: 0.75rem 0.5rem 0;
+  padding: 1.5rem 0.5rem 0;
   color: #b4d0e7;
   font-size: 1rem;
   line-height: 1.25;
@@ -1619,5 +1627,12 @@ body.is-ready .step-item:nth-child(3) {
   .step-item {
     animation: none;
     opacity: 1;
+  }
+
+  .feature-carousel-image,
+  .feature-carousel-link:hover .feature-carousel-image,
+  .feature-carousel-link:focus-visible .feature-carousel-image {
+    transform: none;
+    transition: none;
   }
 }
