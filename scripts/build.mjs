@@ -110,6 +110,14 @@ const applyDefaultCopy = (html, copy, brandName) => {
       /(<a class="[^"]*feature-offer-cta[^"]*"[^>]*?)href="#"/g,
       `$1href="${ctaUrl}"`
     );
+    html = html.replace(
+      /(<a class="[^"]*hero-logo-link[^"]*"[^>]*?)href="#"/g,
+      `$1href="${ctaUrl}"`
+    );
+    html = html.replace(
+      /(<a class="[^"]*feature-carousel-link[^"]*"[^>]*?)href="#"/g,
+      `$1href="${ctaUrl}"`
+    );
   }
 
   return html;
@@ -124,26 +132,35 @@ const languageLabels = {
   zh: "中文",
 };
 
+const languageShortLabels = {
+  vi: "VN",
+  en: "EN",
+  zh: "中文",
+};
+
 const buildLangSwitcher = (languages) => {
+  const defaultLang = languages[0];
   const options = languages
     .map(
-      (lang) => `            <button class="lang-switcher-option flex w-full items-center gap-2 whitespace-nowrap px-3 py-2 text-left text-[#252b38] transition hover:bg-[#eb4758]/10" type="button" data-lang-option="${lang}">
-              <span>${languageLabels[lang] || lang.toUpperCase()}</span>
+      (lang) => `            <button class="lang-switcher-option flex w-full items-center gap-2 whitespace-nowrap px-3 py-2 text-left transition" type="button" data-lang-option="${lang}">
+              <span class="lang-switcher-option-label-short">${languageShortLabels[lang] || lang.toUpperCase()}</span>
+              <span class="lang-switcher-option-label-long">${languageLabels[lang] || lang.toUpperCase()}</span>
             </button>`
     )
     .join("\n");
 
-  return `        <details class="lang-switcher group absolute right-[4.75rem] top-2 z-40 sm:right-[5.5rem] sm:top-4">
-          <summary class="lang-switcher-summary flex cursor-pointer list-none items-center gap-2 rounded-full border border-white/70 bg-white/85 px-3 py-1 text-sm text-[#252b38] shadow-[0_10px_28px_rgba(15,23,42,0.12)] backdrop-blur">
-            <span data-lang-current data-i18n="lang.current">${languageLabels[languages[0]] || languages[0].toUpperCase()}</span>
-            <svg class="h-5 w-5 text-slate-500 transition group-open:rotate-180" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
-            </svg>
-          </summary>
-          <div class="lang-switcher-menu absolute right-0 mt-2 w-full min-w-full overflow-hidden rounded-2xl border border-white/70 bg-white/95 py-1 text-sm shadow-[0_18px_48px_rgba(15,23,42,0.16)] backdrop-blur">
+  return `          <details class="lang-switcher group relative">
+            <summary class="lang-switcher-summary flex cursor-pointer list-none items-center gap-2 rounded-full px-3 py-1 text-sm backdrop-blur">
+              <span class="lang-switcher-label-short" data-lang-current-short>${languageShortLabels[defaultLang] || defaultLang.toUpperCase()}</span>
+              <span class="lang-switcher-label-long" data-lang-current data-i18n="lang.current">${languageLabels[defaultLang] || defaultLang.toUpperCase()}</span>
+              <svg class="h-5 w-5 shrink-0 text-slate-500 transition group-open:rotate-180" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+              </svg>
+            </summary>
+            <div class="lang-switcher-menu absolute right-0 mt-2 min-w-full overflow-hidden rounded-2xl py-1 text-sm backdrop-blur">
 ${options}
-          </div>
-        </details>`;
+            </div>
+          </details>`;
 };
 
 const layoutConfig = {
@@ -160,7 +177,7 @@ const layoutConfig = {
       })(document);
     </script>`,
     fontPreload: `    <span class="font-cn pointer-events-none absolute -z-10 opacity-0" lang="zh-Hans" aria-hidden="true">88 次幸运免费旋转 仅限前 300 名玩家 解锁大奖 为什么选择 开启娱乐旅程</span>`,
-    logoClass: "hero-logo absolute left-4 top-5 z-20 w-36 sm:inset-x-0 sm:top-7 sm:mx-auto sm:w-52",
+    logoClass: "hero-logo-link absolute left-4 top-5 z-20 block w-36 sm:inset-x-0 sm:top-7 sm:mx-auto sm:w-52",
     heroTitleClass: "hero-copy-title text-balance font-cn-display max-w-3xl text-3xl text-[#2c303a] sm:text-5xl",
     sectionTitleClass: "text-balance font-cn-section text-2xl sm:text-3xl",
     featureHeadingClass: "text-balance font-black font-cn-section",
@@ -169,7 +186,7 @@ const layoutConfig = {
   vietnamese: {
     headFonts: `    <link href="https://fonts.googleapis.com/css2?family=Monda:wght@400..700&display=swap" rel="stylesheet" />`,
     fontPreload: "",
-    logoClass: "hero-logo absolute inset-x-0 top-5 z-20 mx-auto w-36 sm:top-7 sm:w-52",
+    logoClass: "hero-logo-link absolute inset-x-0 top-5 z-20 mx-auto block w-36 sm:top-7 sm:w-52",
     heroTitleClass: "hero-copy-title text-balance max-w-3xl text-3xl font-bold text-[#2c303a] sm:text-5xl",
     sectionTitleClass: "text-balance text-2xl font-bold sm:text-3xl",
     featureHeadingClass: "text-balance font-bold",
